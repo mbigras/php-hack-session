@@ -1,10 +1,6 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
+mysql_password = 'foobar'
+
 Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -64,7 +60,13 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    debconf-set-selections <<< 'mysql-server mysql-server/root_password password #{mysql_password}'
+    debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password #{mysql_password}'
+
     apt-get update
-    apt-get install -y php-cli
+    apt-get install -y \
+          mysql-server \
+          php-cli \
+          php-mysqlnd
   SHELL
 end
