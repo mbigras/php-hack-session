@@ -31,9 +31,17 @@ id: 2 - Name: bar
 id: 3 - Name: baz
 ```
 
+```
+curl -s localhost:8080/query.php | ruby -pe '$_.gsub!(/<br>/, "\n")'
+id: 1 - Name: foo
+id: 2 - Name: bar
+id: 3 - Name: baz
+```
+
 ## Links
 
 * http://www.hackingwithphp.com/21/2/3/your-first-cli-script
 * https://stackoverflow.com/questions/17666249/how-to-import-an-sql-file-using-the-command-line-in-mysql
 * https://www.w3schools.com/php/php_mysql_select.asp
 * https://stackoverflow.com/questions/7250356/how-to-install-mysqli
+* https://help.ubuntu.com/lts/serverguide/php.html.en
